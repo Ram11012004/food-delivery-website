@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ello Foodies - Order Food Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="responsive_styles.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1 class="logo">Ello Foodies</h1>
+            <div class="food-preference">
+                <button class="pref-btn active" data-pref="all">All</button>
+                <button class="pref-btn" data-pref="veg">Veg</button>
+                <button class="pref-btn" data-pref="non-veg">Non-veg</button>
+            </div>
+            <div class="cart-icon" id="cart-icon">
+                <img src="images/cart.png" alt="Cart">
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <section id="varieties">
+            <h2>What's on your mind?</h2>
+            <div class="variety-list">
+                <div class="variety-item"><img src="images/idly.jpeg" alt="Idly"><p>Idli</p></div>
+                <div class="variety-item"><img src="images/dosa.jpeg" alt="Dosa"><p>Dosa</p></div>
+                <div class="variety-item"><img src="images/sandwich.jpeg" alt="Sandwich"><p>Sandwich</p></div>
+                <div class="variety-item"><img src="images/biryani1.jpeg" alt="Biryani"><p>Biryani</p></div>
+                <div class="variety-item"><img src="images/ice.jpeg" alt="Ice cream"><p>Ice Cream</p></div>
+                <div class="variety-item"><img src="images/coffee.jpeg" alt="Coffee"><p>Coffee</p></div>
+                <div class="variety-item"><img src="images/tea.jpeg" alt="Tea"><p>Tea</p></div>
+                <div class="variety-item"><img src="images/samosa.jpeg" alt="Samosa"><p>Samosa</p></div>
+            </div>
+        </section>
+
+        <section id="offers">
+            <div class="offer-banner">
+                <p>Flat ₹200 OFF - Flash Sale 4-7 PM</p>
+            </div>
+        </section>
+
+        <section id="restaurants">
+            <h2>Restaurants Near You</h2>
+            <div class="restaurant-list"></div>
+        </section>
+
+        <section id="menu" style="display: none;">
+            <h2>Restaurant Menu</h2>
+            <div id="menu-items"></div>
+        </section>
+
+        <section id="cart" class="cart-section">
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <p id="cart-total">Total: ₹0.00</p>
+            <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
+        </section>
+    </main>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

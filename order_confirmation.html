@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Ello Foodies</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .confirmation-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 32px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .success-animation {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 24px;
+            background: #60b246;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .success-icon {
+            font-size: 48px;
+            color: white;
+        }
+
+        h1 {
+            color: #282c3f;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .order-id {
+            color: #686b78;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .delivery-info {
+            background: #f8f8f8;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .delivery-time {
+            font-size: 18px;
+            color: #282c3f;
+            margin-bottom: 8px;
+        }
+
+        .delivery-address {
+            color: #686b78;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .order-summary {
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .order-summary h2 {
+            font-size: 18px;
+            color: #282c3f;
+            margin-bottom: 16px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #686b78;
+        }
+
+        .back-button {
+            background: #fc8019;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            min-width: 200px;
+        }
+
+        .back-button:hover {
+            background: #e67812;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1 class="logo">Ello Foodies</h1>
+        </div>
+    </header>
+
+    <div class="confirmation-container">
+        <div class="success-animation">
+            <span class="success-icon">✓</span>
+        </div>
+        <h1>Order Placed Successfully!</h1>
+        <p class="order-id">Order ID: #<span id="order-number"></span></p>
+
+        <div class="delivery-info">
+            <p class="delivery-time">Estimated Delivery Time: <span id="delivery-time"></span></p>
+            <p class="delivery-address" id="delivery-address"></p>
+        </div>
+
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div id="order-items"></div>
+        </div>
+
+        <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const order = JSON.parse(localStorage.getItem("lastOrder"));
+            if (!order) {
+                window.location.href = "index.html";
+                return;
+            }
+
+            // Generate random order number
+            document.getElementById("order-number").textContent = Math.floor(Math.random() * 1000000);
+
+            // Calculate and display estimated delivery time
+            const deliveryDate = new Date(order.orderTime);
+            deliveryDate.setMinutes(deliveryDate.getMinutes() + 45);
+            document.getElementById("delivery-time").textContent = 
+                deliveryDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            // Display delivery address
+            const addr = order.address;
+            document.getElementById("delivery-address").textContent = 
+                `${addr.type}: ${addr.address}${addr.floor ? ', ' + addr.floor : ''}${addr.landmark ? ', Near ' + addr.landmark : ''}`;
+
+            // Display order items
+            const orderItemsContainer = document.getElementById("order-items");
+            const billing = order.billing;
+
+            order.items.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("order-item");
+                itemDiv.innerHTML = `
+                    <span>${item.name} x${item.quantity}</span>
+                    <span>₹${itemTotal.toFixed(2)}</span>
+                `;
+                orderItemsContainer.appendChild(itemDiv);
+            });
+
+            // Add bill details
+            const billDetails = document.createElement("div");
+            billDetails.classList.add("bill-details");
+            billDetails.innerHTML = `
+                <div class="bill-row">
+                    <span>Item Total</span>
+                    <span>₹${billing.itemTotal.toFixed(2)}</span>
+                </div>
+                <div class="bill-row">
+                    <span>Delivery Fee</span>
+                    <span>₹${billing.deliveryFee.toFixed(2)}</span>
+                </div>
+                <div class="bill-row">
+                    <span>Platform Fee</span>
+                    <span>₹${billing.platformFee.toFixed(2)}</span>
+                </div>
+                <div class="bill-row">
+                    <span>GST (5%)</span>
+                    <span>₹${billing.gst.toFixed(2)}</span>
+                </div>
+                <div class="bill-row total">
+                    <span>Total Amount</span>
+                    <span>₹${billing.finalTotal.toFixed(2)}</span>
+                </div>
+            `;
+            orderItemsContainer.appendChild(billDetails);
+        });
+    </script>
+</body>
+</html>

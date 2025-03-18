@@ -1,0 +1,287 @@
+/* Smooth Transitions */
+:root {
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scale Up Animation */
+@keyframes scaleUp {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Shimmer Loading Effect */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Slide In Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Apply Animations to Elements */
+
+/* Restaurant Cards */
+.restaurant-card {
+    animation: fadeIn 0.3s var(--transition-timing);
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s var(--transition-timing);
+}
+
+/* Menu Items */
+.menu-item {
+    animation: fadeIn 0.3s var(--transition-timing);
+    animation-fill-mode: both;
+}
+
+.menu-items-list .menu-item {
+    animation-delay: calc(var(--item-index) * 0.1s);
+}
+
+/* Add to Cart Button */
+.add-to-cart {
+    transition: all 0.2s var(--transition-timing);
+}
+
+.add-to-cart:active {
+    transform: translateX(-50%) scale(0.95);
+}
+
+/* Cart Items */
+.cart-item {
+    animation: slideIn 0.3s var(--transition-timing);
+}
+
+/* Quantity Controls */
+.quantity-btn {
+    transition: transform 0.2s var(--transition-timing);
+}
+
+.quantity-btn:active {
+    transform: scale(0.9);
+}
+
+/* Loading States */
+.loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* Cart Count Badge */
+#cart-count {
+    animation: pulse 1s var(--transition-timing);
+}
+
+/* Variety Items */
+.variety-item {
+    animation: scaleUp 0.3s var(--transition-timing);
+}
+
+.variety-item:hover img {
+    animation: bounce 1s var(--transition-timing);
+}
+
+/* Menu Categories */
+.menu-category {
+    transition: all 0.2s var(--transition-timing);
+}
+
+.menu-category.active {
+    position: relative;
+}
+
+.menu-category.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    animation: scaleUp 0.2s var(--transition-timing);
+}
+
+/* Customization Modal */
+.customization-modal {
+    animation: fadeIn 0.3s var(--transition-timing);
+}
+
+.modal-content {
+    animation: scaleUp 0.3s var(--transition-timing);
+}
+
+/* Cart Summary */
+.cart-summary {
+    animation: slideIn 0.3s var(--transition-timing);
+}
+
+/* Empty Cart */
+.empty-cart {
+    animation: fadeIn 0.5s var(--transition-timing);
+}
+
+/* Savings Info */
+.savings-info {
+    animation: pulse 2s var(--transition-timing) infinite;
+}
+
+/* Restaurant Header */
+.restaurant-header {
+    animation: fadeIn 0.5s var(--transition-timing);
+}
+
+/* Menu Search */
+.menu-search input {
+    transition: box-shadow 0.2s var(--transition-timing);
+}
+
+.menu-search input:focus {
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* Delivery Instructions */
+.instruction-input, .address-select {
+    transition: border-color 0.2s var(--transition-timing);
+}
+
+.instruction-input:focus, .address-select:focus {
+    border-color: var(--primary-color);
+}
+
+/* Bill Details */
+.bill-details {
+    animation: fadeIn 0.5s var(--transition-timing);
+}
+
+/* Checkout Button */
+#checkout-btn {
+    transition: transform 0.2s var(--transition-timing),
+                background-color 0.2s var(--transition-timing);
+}
+
+#checkout-btn:hover {
+    transform: translateY(-2px);
+}
+
+#checkout-btn:active {
+    transform: translateY(0);
+}
+
+/* Loading Skeleton Animation */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 20%,
+        rgba(255, 255, 255, 0.5) 60%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* Hover Effects */
+.nav-btn, .menu-category, .add-suggestion {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-btn::after, .menu-category::after, .add-suggestion::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.4s var(--transition-timing),
+                opacity 0.3s var(--transition-timing);
+}
+
+.nav-btn:active::after, .menu-category:active::after, .add-suggestion:active::after {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 1;
+    transition: 0s;
+}
+
+/* Suggestions Section */
+.suggestion-items {
+    scroll-behavior: smooth;
+}
+
+.suggestion-item {
+    transition: transform 0.2s var(--transition-timing);
+}
+
+.suggestion-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Info Icons */
+.info-icon {
+    transition: transform 0.2s var(--transition-timing);
+}
+
+.info-icon:hover {
+    transform: scale(1.2);
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Ello Foodies</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="checkout_styles.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1 class="logo">Ello Foodies</h1>
+        </div>
+    </header>
+
+    <div class="checkout-container">
+        <div class="checkout-left">
+            <div class="address-section">
+                <h2>Delivery Address</h2>
+                <div class="input-group">
+                    <select id="address-type" class="input-field">
+                        <option value="home">Home</option>
+                        <option value="work">Work</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <textarea id="complete-address" class="input-field" placeholder="Complete Address" rows="3"></textarea>
+                </div>
+                <div class="input-row">
+                    <input type="text" id="floor" placeholder="Floor (Optional)">
+                    <input type="text" id="landmark" placeholder="Landmark (Optional)">
+                </div>
+                <button id="save-address" class="primary-button">Save Address & Proceed</button>
+            </div>
+
+            <div class="payment-section" style="display: none;">
+                <h2>Payment Method</h2>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <label>
+                            <input type="radio" name="payment" value="upi">
+                            <img src="images/upi.jpeg" alt="UPI">
+                            UPI
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <label>
+                            <input type="radio" name="payment" value="card">
+                            <img src="images/card.jpeg" alt="Card">
+                            Credit/Debit Card
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <label>
+                            <input type="radio" name="payment" value="cod">
+                            <img src="images/cod.png" alt="COD">
+                            Cash on Delivery
+                        </label>
+                    </div>
+                </div>
+                <button id="place-order" class="primary-button">Place Order</button>
+            </div>
+        </div>
+
+        <div class="checkout-right">
+            <div id="cart-summary">
+                <h3>Order Summary</h3>
+                <div id="cart-items"></div>
+                <div id="bill-details"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="checkout.js"></script>
+</body>
+</html> 
